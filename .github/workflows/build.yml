@@ -62,14 +62,8 @@ jobs:
         working-directory: ${{ env.libraryName }}
         shell: bash
         run: |
-          ./build_controller.sh --target x86_64-pc-windows-msvc && \
-          cd controller && \
-          ls
-
-      - shell: bash
-        run: |
-          ls -R
-        
+          ./build_controller.sh --target x86_64-pc-windows-msvc
+          
       # ./wi-pro-esp32-ftm/firmware/bin:
       # bootloader.bin
       # firmware
@@ -90,8 +84,12 @@ jobs:
       - if: ${{ matrix.os == 'windows-latest' }}
         shell: bash
         run: |
-           cp ${{ env.libraryName }}/controller/target/x86_64-pc-windows-msvc/debug/controller*.exe ./dist/controller/
-           
+           cp ${{ env.libraryName }}/controller/target/x86_64-pc-windows-msvc/debug/controller*.exe ./dist/controller/ 
+
+      - shell: bash
+        run: |
+          ls -R
+          
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Archive Release
         uses: thedoctor0/zip-release@master
