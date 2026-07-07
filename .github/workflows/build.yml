@@ -90,7 +90,7 @@ jobs:
       - if: ${{ matrix.os == 'windows-latest' }}
         shell: bash
         run: |
-           cp ${{ env.libraryName }}/controller/*.exe ./dist/controller/
+           cp ${{ env.libraryName }}/controller/target/x86_64-pc-windows-msvc/debug/controller*.exe ./dist/controller/
            
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Archive Release
