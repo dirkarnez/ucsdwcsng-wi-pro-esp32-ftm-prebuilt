@@ -48,8 +48,8 @@ jobs:
           set -e
           sudo chmod +x ./build_firmware.sh && \
           sudo chmod +x ./build_controller.sh && \
-          ./build_firmware.sh && \
-          ./build_controller.sh --target x86_64-pc-windows-gnu
+          ./build_controller.sh --target x86_64-pc-windows-gnu && \
+          ./build_firmware.sh
           
       # ./wi-pro-esp32-ftm/firmware/bin:
       # bootloader.bin
