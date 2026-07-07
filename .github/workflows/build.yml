@@ -60,9 +60,7 @@ jobs:
           
       - if: ${{ matrix.os == 'windows-latest' }}
         working-directory: ${{ env.libraryName }}
-        run: |
-          set -e
-          ./build_controller.sh --target x86_64-pc-windows-msvc
+        run: ./build_controller.sh --target x86_64-pc-windows-msvc
           
       # ./wi-pro-esp32-ftm/firmware/bin:
       # bootloader.bin
