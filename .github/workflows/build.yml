@@ -68,7 +68,8 @@ jobs:
       # firmware.bin
       # firmware.dis
       # partition-table.bin
-      - run: |
+      - shell: bash
+        run: |
            mkdir -pv dist/{firmware,controller}
            
       - if: ${{ matrix.os == 'ubuntu-latest' }}
