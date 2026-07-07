@@ -61,7 +61,7 @@ jobs:
       - if: ${{ matrix.os == 'windows-latest' }}
         working-directory: ${{ env.libraryName }}
         run: ./build_controller.sh --target x86_64-pc-windows-msvc
-          
+        
       # ./wi-pro-esp32-ftm/firmware/bin:
       # bootloader.bin
       # firmware
@@ -82,7 +82,7 @@ jobs:
       - if: ${{ matrix.os == 'windows-latest' }}
         shell: bash
         run: |
-           cp ${{ env.libraryName }}/controller/controller* ./dist/controller/
+           cp ${{ env.libraryName }}/controller/controller.exe ./dist/controller/
            
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Archive Release
