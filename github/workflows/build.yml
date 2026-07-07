@@ -1,0 +1,68 @@
+name: build
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - '*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+permissions:
+    contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      libraryName: wi-pro-esp32-ftm
+      tagName: 60abd3b7530a0c7990992757caa213ff378f97b3
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+          fetch-depth: 0 # <-- clone with complete history
+          
+      - uses: actions/checkout@v6
+        with:
+          repository: ucsdwcsng/wi-pro-esp32-ftm
+          ref: ${{ env.tagName }}
+          path: ${{ env.libraryName }}
+          submodules: true
+          fetch-depth: 0 # <-- clone with complete history
+
+      - run: |
+          sudo chmod +x ./setup.sh
+
+      - working-directory: ${{ env.libraryName }}
+        run: ../setup.sh
+          
+      - working-directory: ${{ env.libraryName }}
+        run: |
+          sudo chmod +x ./build.sh && \
+          ./build.sh
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          directory: '${{ env.libraryName }}/firmware/bin'
+          filename: "${{ github.event.repository.name }}-${{ github.ref_name }}}.zip"
+          
+      - name: Release prebuilt
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{ env.libraryName }}/firmware/bin/${{ github.event.repository.name }}-${{ github.ref_name }}.zip"
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+    # # this action by default runs "idf.py build"
+    #   - name: esp-idf build
+    #     uses: espressif/esp-idf-ci-action@v1.2.0
+    #     with:
+    #       esp_idf_version: v5.5.2
+    #       target: esp32c5
+
+      - run: |
+          ls -R
