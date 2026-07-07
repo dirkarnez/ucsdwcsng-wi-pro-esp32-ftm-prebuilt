@@ -56,7 +56,7 @@ jobs:
       - run: |
            mkdir -pv dist/{firmware,controller} && \
            cp ${{ env.libraryName }}/firmware/bin/* ./dist/firmware/ && \
-           cp ${{ env.libraryName }}/controller/controller ./dist/controller/ && \
+           cp ${{ env.libraryName }}/controller/controller* ./dist/controller/ && \
            cp ${{ env.libraryName }}/flash.sh ./dist/
            
       - name: Archive Release
