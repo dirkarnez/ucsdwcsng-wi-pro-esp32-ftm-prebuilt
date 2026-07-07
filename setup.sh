@@ -2,7 +2,7 @@
 
 set -e
 
-sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+sudo apt-get install git wget flex bison mingw-w64 gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 pip3 install esptool
 
 cargo install cargo-generate
