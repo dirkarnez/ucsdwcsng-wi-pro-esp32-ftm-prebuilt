@@ -112,7 +112,7 @@ jobs:
         with:
           artifacts: |
             "dist/firmware/${{ github.event.repository.name }}-firmware-${{ github.ref_name }}.zip"
-            "dist/firmware/${{ github.event.repository.name }}-controller-${{ github.ref_name }}-${{ matrix.os }}.zip"
+            "dist/controller/${{ github.event.repository.name }}-controller-${{ github.ref_name }}-${{ matrix.os }}.zip"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           
