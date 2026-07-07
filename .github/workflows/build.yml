@@ -60,7 +60,12 @@ jobs:
           
       - if: ${{ matrix.os == 'windows-latest' }}
         working-directory: ${{ env.libraryName }}
-        run: ./build_controller.sh --target x86_64-pc-windows-msvc
+        run: |
+          ./build_controller.sh --target x86_64-pc-windows-msvc
+
+      - shell: bash
+        run: |
+          ls -R
         
       # ./wi-pro-esp32-ftm/firmware/bin:
       # bootloader.bin
@@ -82,7 +87,7 @@ jobs:
       - if: ${{ matrix.os == 'windows-latest' }}
         shell: bash
         run: |
-           cp ${{ env.libraryName }}/controller/controller.exe ./dist/controller/
+           cp ${{ env.libraryName }}/controller/*.exe ./dist/controller/
            
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Archive Release
@@ -115,5 +120,3 @@ jobs:
     #       esp_idf_version: v5.5.2
     #       target: esp32c5
 
-      - run: |
-          ls -R
