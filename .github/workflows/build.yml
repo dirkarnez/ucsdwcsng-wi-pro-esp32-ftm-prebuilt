@@ -41,10 +41,12 @@ jobs:
           
       - working-directory: ${{ env.libraryName }}
         run: |
-          sudo chmod +x ./build.sh && \
-          ./build.sh
-
-
+          set -e
+          sudo chmod +x ./build_firmware.sh && \
+          sudo chmod +x ./build_controller.sh && \
+          ./build_firmware.sh && \
+          ./build_controller.sh --target x86_64-pc-windows-gnu
+          
       # ./wi-pro-esp32-ftm/firmware/bin:
       # bootloader.bin
       # firmware
