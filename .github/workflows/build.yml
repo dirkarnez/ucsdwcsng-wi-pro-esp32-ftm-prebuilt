@@ -68,12 +68,18 @@ jobs:
       # firmware.bin
       # firmware.dis
       # partition-table.bin
+      - run: |
+           mkdir -pv dist/{firmware,controller}
+           
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
-           mkdir -pv dist/{firmware,controller} && \
            cp ${{ env.libraryName }}/firmware/bin/* ./dist/firmware/ && \
            cp ${{ env.libraryName }}/controller/controller* ./dist/controller/ && \
            cp ${{ env.libraryName }}/flash.sh ./dist/
+           
+      - if: ${{ matrix.os == 'windows-latest' }}
+        run: |
+           cp ${{ env.libraryName }}/controller/controller* ./dist/controller/
            
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Archive Release
