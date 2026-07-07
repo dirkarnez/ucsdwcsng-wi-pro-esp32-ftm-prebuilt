@@ -84,12 +84,8 @@ jobs:
       - if: ${{ matrix.os == 'windows-latest' }}
         shell: bash
         run: |
-           cp ${{ env.libraryName }}/controller/target/x86_64-pc-windows-msvc/debug/controller*.exe ./dist/controller/ 
-
-      - shell: bash
-        run: |
-          ls -R
-          
+           cp ${{ env.libraryName }}/controller/target/x86_64-pc-windows-msvc/debug/controller*.exe ./dist/controller/
+           
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Archive Release
         uses: thedoctor0/zip-release@master
@@ -105,10 +101,14 @@ jobs:
           directory: 'dist/controller'
           filename: "${{ github.event.repository.name }}-controller-${{ github.ref_name }}-${{ matrix.os }}.zip"
           
+      - shell: bash
+        run: |
+          ls -R
+          
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/**/.zip"
+          artifacts: "dist/**/*.zip"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           
