@@ -60,8 +60,11 @@ jobs:
           
       - if: ${{ matrix.os == 'windows-latest' }}
         working-directory: ${{ env.libraryName }}
+        shell: bash
         run: |
-          ./build_controller.sh --target x86_64-pc-windows-msvc
+          ./build_controller.sh --target x86_64-pc-windows-msvc && \
+          cd controller && \
+          ls
 
       - shell: bash
         run: |
