@@ -80,14 +80,14 @@ jobs:
            cp ${{ env.libraryName }}/firmware/bin/* ./dist/firmware/ && \
            cp ${{ env.libraryName }}/controller/controller ./dist/controller/ && \
            cp ${{ env.libraryName }}/controller/server ./dist/controller/ && \
-           cp ${{ env.libraryName }}/flash.sh ./dist/
+           cp ${{ env.libraryName }}/flash.sh ./dist/flash-esp32-s3.sh
            
       - if: ${{ matrix.os == 'windows-latest' }}
         shell: bash
         run: |
            cp ${{ env.libraryName }}/controller/target/x86_64-pc-windows-msvc/debug/controller.exe ./dist/controller/ && \
            cp ${{ env.libraryName }}/controller/target/x86_64-pc-windows-msvc/debug/server.exe ./dist/controller/
-           cp ${{ env.libraryName }}/flash-esp32-s3.cmd ./dist/
+           cp ./flash-esp32-s3.cmd ./dist/
            
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         name: Archive Release
